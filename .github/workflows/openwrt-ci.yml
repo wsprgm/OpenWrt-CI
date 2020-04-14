@@ -33,7 +33,7 @@ jobs:
 
       - name: Clone
         run: |
-          echo $pwd
+          echo $PWD
           git clone https://github.com/coolsnowwolf/lede
           cd lede
 
@@ -41,7 +41,7 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
-          echo $pwd
+          echo $PWD
           docker rmi `docker images -q`
           sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d
           sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php*
@@ -62,13 +62,13 @@ jobs:
 
       - name: Update feeds
         run: |
-          echo $pwd
+          echo $PWD
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
       - name: Generate configuration file
         run: |
-          echo $pwd
+          echo $PWD
           rm -f ./.config*
           touch ./.config
 
@@ -184,14 +184,14 @@ jobs:
 
       - name: Make download
         run: |
-          echo $pwd
+          echo $PWD
           make download -j8
           find ./dl/ -size -1024c -exec rm -f {} \;
           df -h
 
       - name: Compile firmware
         run: |
-          echo $pwd
+          echo $PWD
           make -j$(nproc) || make -j1 V=s
           echo "======================="
           echo "Space usage:"
